@@ -43,12 +43,15 @@ if __name__ == '__main__':
         data = [[float(x) for x in line.split()] for line in f]
 
     delta = []
+    thethas = []
 
     thetha0 = random.random()
     thetha1 = random.random()
     alpha = 0.009
     delta0 = 0
     delta1 = 0
+    
+    thethas.append([thetha0, thetha1])
     
     iteration = 10000
     
@@ -61,15 +64,25 @@ if __name__ == '__main__':
         thetha0 -= (alpha * delta0)
         thetha1 -= (alpha * delta1)
         delta.append([delta0, delta1])
+        thethas.append([thetha0, thetha1])
         print('Gradient Descent 0 Value: ', delta0)
         print('Gradient Descent 1 Value: ', delta1)
+        print()
     
     arr = np.asarray(delta)
     plt.plot(arr)
-    plt.ylabel('Gradient Value')
+    plt.ylabel('Gradient Descent Value')
     plt.xlabel('Iterations')
     plt.legend(('thetha0', 'thetha1'))
 
+    plt.show()
+    
+    arr = np.asarray(thethas)
+    plt.plot(arr)
+    plt.ylabel('Thetha Value')
+    plt.xlabel('Iterations')
+    plt.legend(('thetha0', 'thetha1'))
+    
     plt.show()
     
     print('Using the updated parameters, the value of 4: ', getPrediction(thetha0, thetha1, 4))
